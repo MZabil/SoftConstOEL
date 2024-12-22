@@ -1,2 +1,4 @@
-abc||123||1
-1||1||2
+Soft Const OEL||Make Code||1
+Send submission on GCR||Send OEL complete on GCR||1
+Soft Const OEL Report||Make report for SC OEL||2
+Soft Const OEL Output File||Provide output screenshots in file||2

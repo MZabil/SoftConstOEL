@@ -26,7 +26,12 @@ public class TaskListGUI extends JFrame {
 
         // Task Table
         String[] columnNames = {"Title", "Description", "Priority"};
-        tableModel = new DefaultTableModel(columnNames, 0);
+        tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return true; // Allow editing
+            }
+        };
         JTable taskTable = new JTable(tableModel) {
             @Override
             public Component prepareRenderer(javax.swing.table.TableCellRenderer renderer, int row, int column) {
@@ -45,6 +50,23 @@ public class TaskListGUI extends JFrame {
         header.setBackground(new Color(0, 0, 0, 150)); // Semi-transparent black background
         header.setForeground(Color.WHITE); // White text color for contrast
         header.setOpaque(true); // Ensure the background is drawn
+
+        // Update taskManager when a cell is edited
+        tableModel.addTableModelListener(e -> {
+            int row = e.getFirstRow();
+            int column = e.getColumn();
+
+            if (row >= 0 && column >= 0) {
+                String newValue = tableModel.getValueAt(row, column).toString();
+                Task task = taskManager.getTask(row);
+
+                switch (column) {
+                    case 0 -> task.setTitle(newValue); // Update title
+                    case 1 -> task.setDescription(newValue); // Update description
+                    case 2 -> task.setPriority(Integer.parseInt(newValue)); // Update priority
+                }
+            }
+        });
 
         // JScrollPane for the table
         JScrollPane scrollPane = new JScrollPane(taskTable);

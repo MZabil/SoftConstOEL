@@ -18,11 +18,18 @@ public class TaskManager {
         }
     }
 
+    public Task getTask(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            return tasks.get(index);
+        }
+        throw new IndexOutOfBoundsException("Invalid task index: " + index);
+    }
+
     public List<Task> getTasks() {
         return tasks;
     }
 
     public void sortTasksByPriority() {
-    tasks.sort((task1, task2) -> Integer.compare(task1.getPriority(), task2.getPriority())); // Sort by priority ascending
-}
+        tasks.sort((t1, t2) -> Integer.compare(t1.getPriority(), t2.getPriority()));
+    }
 }
