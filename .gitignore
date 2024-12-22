@@ -1,0 +1,16 @@
+# Ignore compiled files
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignore log files
+*.log
+
+# Ignore IDE files (e.g., VSCode, IntelliJ)
+.vscode/
+.idea/
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
